@@ -93,6 +93,7 @@ docs/_build/
 *.swn
 *.bak
 *.orig
+help.txt
 
 # Secrets and credentials
 /secrets.json

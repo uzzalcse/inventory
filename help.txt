@@ -4,3 +4,74 @@ docker exec -it inventory_app python manage.py createsuperuser
 
 docker exec -it inventory_app python manage.py makemigrations
 docker exec -it inventory_app python manage.py migrate
+
+
+images
+
+[
+  {
+    "id": 1,
+    "name": "Hotel Exterior",
+    "url": "https://example.com/images/hotel-exterior.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Hotel Lobby",
+    "url": "https://example.com/images/hotel-lobby.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Deluxe Room",
+    "url": "https://example.com/images/deluxe-room.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Swimming Pool",
+    "url": "https://example.com/images/swimming-pool.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Restaurant",
+    "url": "https://example.com/images/restaurant.jpg"
+  }
+]
+
+amenities
+
+[
+  {
+    "id": 1,
+    "name": "Free WiFi",
+    "description": "Complimentary high-speed internet access in all rooms and common areas."
+  },
+  {
+    "id": 2,
+    "name": "Swimming Pool",
+    "description": "Outdoor swimming pool available for all guests."
+  },
+  {
+    "id": 3,
+    "name": "Fitness Center",
+    "description": "Fully equipped gym with cardio and weight training equipment."
+  },
+  {
+    "id": 4,
+    "name": "Spa",
+    "description": "Relaxing spa services including massages and facial treatments."
+  },
+  {
+    "id": 5,
+    "name": "Restaurant",
+    "description": "On-site restaurant offering a variety of local and international cuisine."
+  },
+  {
+    "id": 6,
+    "name": "Parking",
+    "description": "Free parking for all guests with both outdoor and covered spaces."
+  },
+  {
+    "id": 7,
+    "name": "Pet-Friendly",
+    "description": "Pets are welcome at the hotel with prior arrangement."
+  }
+]
