@@ -1,0 +1,126 @@
+
+services:
+  postgres:
+    image: postgis/postgis:latest # Use the PostGIS image instead of just postgres
+    container_name: inventory-db
+    environment:
+      POSTGRES_USER: uzzal         # Define your database username
+      POSTGRES_PASSWORD: uzzal@123 # Define your password
+      POSTGRES_DB: inventory-db     # Define your database name
+      SCRAPY_DB: scrapy_inventory-db
+    ports:
+      - "5432:5432"                # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist PostgreSQL data
+    networks:
+      - inventoryManagement_network
+
+  web:
+    build: .
+    container_name: inventory_app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"  # Expose Django app on port 8000
+    depends_on:
+      - postgres  # Wait for the db container to be ready before running the web service
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=uzzal
+      - POSTGRES_PASSWORD=uzzal@123
+      - POSTGRES_DB=inventory-db
+      - SCRAPY_DB=scrapy_inventory-db
+    networks:
+      - inventoryManagement_network
+
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - inventoryManagement_network
+
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  inventoryManagement_network:
+    driver: bridge
+
+
+
+
+
+
+
+# services:
+#   db:
+#     image: postgres:16.1-alpine
+#     container_name: postgres_db_2
+#     environment:
+#       POSTGRES_USER: uzzal         # Define your database username
+#       POSTGRES_PASSWORD: uzzal@123 # Define your password
+#       POSTGRES_DB: inventory-management-db     # Define your database name
+#       SCRAPY_DB: scrapy_inventory-management-db
+#     ports:
+#       - "5432:5432"                # Expose PostgreSQL on port 5432
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data  # Persist PostgreSQL data
+
+#     networks:
+#       - inventoryManagement_network
+
+#   web:
+#     build: .
+#     container_name: django_app_2
+#     command: python manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8000:8000"  # Expose Django app on port 8000
+#     depends_on:
+#       - db  # Wait for the db container to be ready before running the web service
+#     environment:
+#       - POSTGRES_HOST=db
+#       - POSTGRES_PORT=5432
+#       - POSTGRES_USER=uzzal
+#       - POSTGRES_PASSWORD=uzzal@123
+#       - POSTGRES_DB=inventory-management-db
+#       - SCRAPY_DB=scrapy_inventory-management-db
+#     networks:
+#       - inventoryManagement_network
+
+
+#   pgadmin:
+#     image: dpage/pgadmin4:latest
+#     container_name: pgadmin
+#     ports:
+#       - "5050:80"
+#     environment:
+#       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+#       - PGADMIN_DEFAULT_PASSWORD=admin123
+#     volumes:
+#       - pgadmin_data:/var/lib/pgadmin
+#     restart: unless-stopped
+#     networks:
+#       - inventoryManagement_network
+
+
+# volumes:
+#   postgres_data:
+#   pgadmin_data:
+
+# networks:
+#   inventoryManagement_network:
+#     driver: bridge

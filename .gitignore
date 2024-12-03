@@ -1,0 +1,99 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+*.sqlite3
+instance/
+.DS_Store
+
+# Django media and static files
+media/
+staticfiles/
+static/
+
+# Local environment variables
+.env
+.env.*
+*.env
+
+# Docker files
+*.pid
+*.log
+*.bak
+docker-compose.override.yml
+
+# Docker specific
+docker-compose.override.yml
+.dockerignore
+docker/
+*.db
+**/__pycache__/
+**/.pytest_cache/
+
+# VS Code specific (if using)
+.vscode/
+.history/
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Coverage reports
+.coverage
+.coverage.*
+*.cover
+.hypothesis/
+
+# Testing
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+htmlcov/
+.junit/
+
+# Sphinx documentation
+docs/_build/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+
+# Secrets and credentials
+/secrets.json
+/secrets/

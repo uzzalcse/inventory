@@ -1,0 +1,6 @@
+docker exec -it inventory_app python manage.py runserver 0.0.0.0:8000
+
+docker exec -it inventory_app python manage.py createsuperuser
+
+docker exec -it inventory_app python manage.py makemigrations
+docker exec -it inventory_app python manage.py migrate
