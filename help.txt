@@ -5,6 +5,12 @@ docker exec -it inventory_app python manage.py createsuperuser
 docker exec -it inventory_app python manage.py makemigrations
 docker exec -it inventory_app python manage.py migrate
 
+//run site map generation command from docker
+
+
+docker-compose exec web python manage.py generate_sitemap
+
+
 
 images
 
