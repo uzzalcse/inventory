@@ -4,8 +4,24 @@ from django.contrib.auth.models import User
 from .models import Location, Accommodation, LocalizedAccommodation
 from leaflet.admin import LeafletGeoAdmin
 
-# Location Admin Configuration
-class LocationAdmin(LeafletGeoAdmin):
+
+#Location with import and export 
+
+from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
+from import_export import resources
+from .models import Location
+from leaflet.admin import LeafletGeoAdmin
+
+# 1. Define a Resource class for the Location model
+class LocationResource(resources.ModelResource):
+    class Meta:
+        model = Location
+        fields = ('id', 'title', 'location_type', 'country_code', 'state_abbr', 'city', 'center')  # Adjust fields as necessary
+
+# 2. Modify LocationAdmin to use ImportExportModelAdmin
+class LocationAdmin(ImportExportModelAdmin, LeafletGeoAdmin):
+    resource_class = LocationResource  # Specify the resource class
     list_display = ('id', 'title', 'location_type', 'country_code', 'created_at', 'center')
     search_fields = ('title', 'country_code', 'city', 'state_abbr')
     list_filter = ('location_type', 'country_code', 'parent')
@@ -16,6 +32,9 @@ class LocationAdmin(LeafletGeoAdmin):
             'fields': ('id', 'title', 'center', 'parent', 'location_type', 'country_code', 'state_abbr', 'city')
         }),
     )
+
+
+
 
 
 # LocalizedAccommodation Admin Configuration

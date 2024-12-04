@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'property_management.apps.PropertyManagementConfig',
     'django.contrib.gis',
     'leaflet',
+    'import_export',
 ]
 
 MIDDLEWARE = [

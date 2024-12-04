@@ -17,10 +17,70 @@
         "US": "us",
         "locations": [
             {
+                "Austin": "us/austin"
+            },
+            {
+                "Boston": "us/boston"
+            },
+            {
+                "Charlotte": "us/charlotte"
+            },
+            {
+                "Chicago": "us/chicago"
+            },
+            {
+                "Columbus": "us/columbus"
+            },
+            {
                 "Dallas": "us/usa/dallas"
             },
             {
+                "Dallas": "us/dallas"
+            },
+            {
+                "Denver": "us/denver"
+            },
+            {
+                "Fort Worth": "us/fort-worth"
+            },
+            {
+                "Houston": "us/houston"
+            },
+            {
+                "Indianapolis": "us/indianapolis"
+            },
+            {
+                "Jacksonville": "us/jacksonville"
+            },
+            {
+                "Los Angeles": "us/los-angeles"
+            },
+            {
+                "New York": "us/new-york"
+            },
+            {
+                "Philadelphia": "us/philadelphia"
+            },
+            {
+                "Phoenix": "us/phoenix"
+            },
+            {
+                "San Antonio": "us/san-antonio"
+            },
+            {
+                "San Diego": "us/san-diego"
+            },
+            {
+                "San Francisco": "us/san-francisco"
+            },
+            {
+                "Seattle": "us/seattle"
+            },
+            {
                 "USA": "us/usa"
+            },
+            {
+                "Washington": "us/washington"
             }
         ]
     }
