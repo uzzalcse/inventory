@@ -1,49 +1,26 @@
 [
     {
-        "bd": "bd",
+        "BD": "bd",
         "locations": [
-            {
-                "AMMC": "bd/ammc/dhaka"
-            },
-            {
-                "Banani": "bd/banani/dhaka"
-            },
             {
                 "Bangladesh": "bd/bangladesh"
             },
             {
-                "W3 Engineers Ltd.": "bd/w3-engineers-ltd/banani/dhaka"
+                "Dhaka": "bd/bangladesh/dhaka"
             },
             {
-                "rajshahi": "bd/rajshahi"
-            },
-            {
-                "shahjalal air port": "bd/shahjalal-air-port/bangladesh"
-            },
-            {
-                "smc": "bd/smc/ammc/dhaka"
+                "Khilkhet": "bd/bangladesh/dhaka/khilkhet"
             }
         ]
     },
     {
-        "ca": "ca",
+        "US": "us",
         "locations": [
             {
-                "dhaka": "ca/dhaka"
-            }
-        ]
-    },
-    {
-        "in": "in",
-        "locations": [
-            {
-                "India": "in/india"
+                "Dallas": "us/usa/dallas"
             },
             {
-                "Kolkata": "in/kolkata/india"
-            },
-            {
-                "Taj Mahal": "in/taj-mahal/india"
+                "USA": "us/usa"
             }
         ]
     }

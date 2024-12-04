@@ -17,39 +17,6 @@ class LocationAdmin(LeafletGeoAdmin):
         }),
     )
 
-# Accommodation Admin Configuration
-# class AccommodationAdmin(LeafletGeoAdmin):
-#     list_display = ('id', 'title', 'user', 'country_code', 'bedroom_count', 'review_score', 'published', 'usd_rate', 'created_at')
-#     search_fields = ('title', 'country_code', 'location__title')
-#     list_filter = ('published', 'country_code', 'bedroom_count', 'review_score', 'location')
-#     ordering = ('title',)
-
-#     fieldsets = (
-#         (None, {
-#             'fields': ('id', 'title', 'country_code', 'bedroom_count', 'review_score', 'usd_rate', 'center', 'location', 'images', 'amenities', 'user', 'published')
-#         }),
-#     )
-
-#     # Filter queryset to show only accommodations that belong to the logged-in user
-#     def get_queryset(self, request):
-#         queryset = super().get_queryset(request)
-#         if request.user.is_superuser:
-#             return queryset  # Superusers can see all accommodations
-#         return queryset.filter(user=request.user)  # Regular users can only see their own accommodations
-
-#     # Optionally, you can also restrict access to the add or change view based on the user
-#     def has_change_permission(self, request, obj=None):
-#         if obj is not None:
-#             return obj.user == request.user  # User can only change accommodations they own
-#         return super().has_change_permission(request, obj)
-
-#     def has_delete_permission(self, request, obj=None):
-#         if obj is not None:
-#             return obj.user == request.user  # User can only delete accommodations they own
-#         return super().has_delete_permission(request, obj)
-
-#     def has_add_permission(self, request):
-#         return super().has_add_permission(request)  # All users can add accommodations
 
 # LocalizedAccommodation Admin Configuration
 class LocalizedAccommodationAdmin(admin.ModelAdmin):
@@ -70,7 +37,8 @@ admin.site.register(Location, LocationAdmin)
 admin.site.register(LocalizedAccommodation, LocalizedAccommodationAdmin)
 
 
-#from here accomodation code starts
+# #from here accomodation code starts
+
 from django.contrib import admin
 from .models import Accommodation
 from leaflet.admin import LeafletGeoAdmin
@@ -94,16 +62,18 @@ class AccommodationAdmin(LeafletGeoAdmin):
             return queryset  # Superusers can see all accommodations
         return queryset.filter(user=request.user)  # Regular users can only see their own accommodations
 
-    # Restrict permission to change and delete only accommodations owned by the logged-in user
+    # Restrict permission to change only accommodations owned by the logged-in user
     def has_change_permission(self, request, obj=None):
         if obj is not None:
             return obj.user == request.user  # User can only change accommodations they own
         return super().has_change_permission(request, obj)
 
+    # Restrict permission to delete only accommodations owned by the logged-in user (for regular users)
+    # Allow superusers to delete any accommodation
     def has_delete_permission(self, request, obj=None):
-        if obj is not None:
-            return obj.user == request.user  # User can only delete accommodations they own
-        return super().has_delete_permission(request, obj)
+        if request.user.is_superuser:
+            return True  # Allow superuser to delete any accommodation
+        return False  # Regular users cannot delete any accommodation
 
     def has_add_permission(self, request):
         return super().has_add_permission(request)  # All users can add accommodations
@@ -111,17 +81,21 @@ class AccommodationAdmin(LeafletGeoAdmin):
     # Override the get_form method to pass the current user and disable the field for non-superusers
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        if not obj:  # When adding a new accommodation
-            if request.user.is_superuser:
-                # Superusers can choose any user
-                form.base_fields['user'].queryset = form.base_fields['user'].queryset.all()
+
+        # Check if the 'user' field is in the form fields before modifying it
+        if 'user' in form.base_fields:
+            if not obj:  # When adding a new accommodation
+                if request.user.is_superuser:
+                    # Superusers can choose any user
+                    form.base_fields['user'].queryset = form.base_fields['user'].queryset.all()
+                else:
+                    # Non-superusers should have their user set automatically and disabled
+                    form.base_fields['user'].initial = request.user
+                    form.base_fields['user'].disabled = True
             else:
-                # Non-superusers should have their user set automatically and disabled
-                form.base_fields['user'].initial = request.user
+                # Disable the user field during edits
                 form.base_fields['user'].disabled = True
-        else:
-            # Disable the user field during edits
-            form.base_fields['user'].disabled = True
+
         return form
 
     # Override the save_model method to automatically set the user field for non-superusers
@@ -133,5 +107,7 @@ class AccommodationAdmin(LeafletGeoAdmin):
 
 # Register the model with the custom admin class
 admin.site.register(Accommodation, AccommodationAdmin)
+
+
 
 
