@@ -11,6 +11,17 @@ docker exec -it inventory_app python manage.py migrate
 docker-compose exec web python manage.py generate_sitemap
 
 
+// run pytest inside docker
+
+docker-compose exec web pytest
+
+// run pytest with coverage
+
+docker-compose exec web pytest --cov=property_management 
+
+
+
+
 
 images
 
