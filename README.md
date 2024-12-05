@@ -73,7 +73,7 @@ This project involves the development of a Property Management System using Djan
 #### Clone the project repository
 
 ```
-https://github.com/uzzalcse/inventory.git
+git clone https://github.com/uzzalcse/inventory.git
 ```
 
 #### Go to the project directory 
